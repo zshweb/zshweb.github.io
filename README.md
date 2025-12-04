@@ -1,1 +1,299 @@
-# zshweb.github.io
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Zachary — Graphic Designer</title>
+  <meta name="description" content="Portfolio of Zachary — graphic designer. Clean, modern, mobile-first single-file portfolio." />
+
+  <!-- Google Font (lightweight) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --muted:#97a0b8;
+      --accent:#6ee7b7; /* fresh mint */
+      --accent-2:#7dd3fc; /* sky */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --max-width:1100px;
+      color-scheme: dark;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071020);color:#e6eef8}
+    a{color:var(--accent);text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{width:clamp(300px,92%,var(--max-width));margin:32px auto;padding:20px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#04202a}
+    .nav{display:flex;gap:14px;align-items:center}
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px 14px;border-radius:10px;color:#04202a;font-weight:600}
+
+    /* Mobile nav */
+    .hamburger{display:none;background:transparent;border:1px solid var(--glass);padding:8px;border-radius:10px}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;margin-top:20px}
+    .eyebrow{color:var(--muted);font-weight:600;letter-spacing:0.06em}
+    h1{font-size:clamp(1.6rem,4vw,2.6rem);margin:6px 0 0}
+    p.lead{color:var(--muted);max-width:70ch;margin:8px 0 0}
+
+    /* Projects grid */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);backdrop-filter: blur(6px)}
+    .card .thumb{height:160px;border-radius:10px;overflow:hidden}
+    .card h3{margin:10px 0 4px;font-size:1rem}
+    .meta{color:var(--muted);font-size:0.9rem}
+
+    /* About / Contact */
+    .split{display:grid;grid-template-columns:1fr 340px;gap:18px;margin-top:22px}
+    .about{padding:16px;background:var(--card);border-radius:12px}
+    .contact{padding:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px}
+    .btn{display:inline-block;padding:10px 12px;border-radius:10px;background:var(--accent);color:#04202a;font-weight:700}
+
+    footer{opacity:0.7;margin:26px 0 60px;font-size:0.9rem}
+
+    /* Modal lightbox */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,6,12,0.6)}
+    .modal.open{display:flex}
+    .modal .inner{max-width:960px;width:100%;border-radius:12px;overflow:auto}
+
+    /* Responsive */
+    @media (max-width:900px){
+      .projects{grid-template-columns:repeat(1,1fr)}
+      .split{grid-template-columns:1fr}
+      .nav{display:none}
+      .hamburger{display:inline-flex}
+      header{gap:10px}
+    }
+
+    @media (prefers-reduced-motion:reduce){*{animation:none;transition:none}}
+
+    /* Small utilities */
+    .muted{color:var(--muted)}
+    .pill{display:inline-block;padding:6px 8px;border-radius:999px;background:var(--glass);font-size:0.85rem}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden>ZD</div>
+        <div>
+          <div style="font-weight:700">Zachary</div>
+          <div class="muted" style="font-size:0.85rem">Graphic Designer — Visual Identity & UI</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="menuBtn" aria-label="Open menu">☰</button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="intro">
+        <div>
+          <div class="eyebrow">Branding & UI for ambitious teams</div>
+          <h1 id="intro">Beautiful, usable visual design that helps products stand out.</h1>
+          <p class="lead">I craft visual identities, marketing assets and product interfaces — focusing on clarity, flexibility, and delightful micro-interactions. I’m available for freelance or contract work.</p>
+
+          <p style="margin-top:12px">
+            <a class="btn" href="#contact">Get in touch</a>
+            <a style="margin-left:10px" class="pill" href="#projects">See work</a>
+          </p>
+        </div>
+
+        <div aria-hidden style="display:flex;align-items:center;justify-content:center">
+          <div style="width:100%;max-width:340px;border-radius:12px;padding:12px;background:linear-gradient(135deg,#07202b 0%, rgba(13,35,50,0.6) 100%);border:1px solid rgba(255,255,255,0.03)">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='640' height='360'><rect width='100%' height='100%' fill='%23071c2a'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='20' fill='%237de3c9'>Featured project preview</text></svg>" alt="Featured project placeholder" style="border-radius:8px;"/>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 style="margin-top:26px">Selected projects</h2>
+        <div class="projects" role="list">
+
+          <!-- Project 1 -->
+          <article class="card" role="listitem">
+            <div class="thumb">
+              <img loading="lazy" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='%2310242b'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='32' fill='%236ee7b7'>Project One</text></svg>" alt="Project One — poster and UI mockups"/>
+            </div>
+            <h3>Project One — Identity & Web</h3>
+            <div class="meta">Branding / Art direction • 2025</div>
+            <p style="margin-top:10px">A modular identity system and marketing site for a fintech startup. Focused on clarity and scale.</p>
+            <p style="margin-top:12px"><a href="#" class="view" data-title="Project One" data-img="project1.jpg">Open preview</a></p>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="card">
+            <div class="thumb">
+              <img loading="lazy" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='%230b1822'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='32' fill='%237dd3fc'>Project Two</text></svg>" alt="Project Two — packaging and posters"/>
+            </div>
+            <h3>Project Two — Packaging</h3>
+            <div class="meta">Packaging / Illustration • 2024</div>
+            <p style="margin-top:10px">Playful packaging designs with a thoughtful illustration system and production-aware constraints.</p>
+            <p style="margin-top:12px"><a href="#" class="view" data-title="Project Two" data-img="project2.jpg">Open preview</a></p>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="card">
+            <div class="thumb">
+              <img loading="lazy" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='%23111a25'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='32' fill='%23ffd6a5'>Project Three</text></svg>" alt="Project Three — UI flows"/>
+            </div>
+            <h3>Project Three — Product UI</h3>
+            <div class="meta">UI / Motion • 2025</div>
+            <p style="margin-top:10px">Design system and micro-interactions for a consumer app with accessibility-first patterns.</p>
+            <p style="margin-top:12px"><a href="#" class="view" data-title="Project Three" data-img="project3.jpg">Open preview</a></p>
+          </article>
+
+          <!-- Project 4 (compact) -->
+          <article class="card">
+            <div class="thumb" style="height:120px"><img loading="lazy" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='400'><rect width='100%' height='100%' fill='%23021b1f'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter,Arial' font-size='28' fill='%23f0a6ff'>Poster Series</text></svg>" alt="Poster series"/></div>
+            <h3>Poster Series</h3>
+            <div class="meta">Artwork / Print • 2023</div>
+            <p style="margin-top:10px">Limited-run poster series exploring geometric forms and bold color combinations.</p>
+            <p style="margin-top:12px"><a href="#" class="view" data-title="Poster Series" data-img="project4.jpg">Open preview</a></p>
+          </article>
+
+        </div>
+      </section>
+
+      <section id="about" class="split">
+        <div class="about">
+          <h3>About</h3>
+          <p class="muted">I’m Zachary — a graphic designer focused on brand identity, packaging, and product interfaces. I value systems that scale, work that’s production-aware, and collaboration that keeps the user's needs central.</p>
+
+          <ul style="margin-top:10px">
+            <li>10+ years design experience</li>
+            <li>Tooling: Figma, Illustrator, Photoshop, After Effects</li>
+            <li>Available for freelance & contract work</li>
+          </ul>
+
+          <p style="margin-top:12px"><a href="#contact" class="btn">Hire me</a></p>
+        </div>
+
+        <aside id="contact" class="contact">
+          <h3>Contact</h3>
+          <p class="muted">Prefer email? <a href="mailto:hello@example.com">hello@example.com</a></p>
+
+          <form id="contactForm" action="#" onsubmit="submitContact(event)" style="margin-top:10px">
+            <label style="display:block;margin-bottom:8px">Name
+              <input name="name" required style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit" />
+            </label>
+
+            <label style="display:block;margin-bottom:8px">Message
+              <textarea name="message" required rows="4" style="width:100%;padding:10px;margin-top:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:inherit"></textarea>
+            </label>
+
+            <button class="btn" type="submit">Send</button>
+          </form>
+
+          <div style="margin-top:14px" class="muted">Or find me on <a href="#">Dribbble</a> • <a href="#">Behance</a> • <a href="#">LinkedIn</a></div>
+        </aside>
+      </section>
+
+    </main>
+
+    <footer>
+      Built with ❤️ • Designed & coded by Zachary — minimalist portfolio template.
+    </footer>
+  </div>
+
+  <!-- Modal for previews -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="inner" role="document">
+      <div style="padding:18px;background:var(--card);border-radius:12px">
+        <button id="closeModal" aria-label="Close preview" style="float:right;background:transparent;border:0;color:var(--muted);font-size:20px">✕</button>
+        <h3 id="modalTitle">Preview</h3>
+        <div id="modalBody" style="margin-top:12px">
+          <img id="modalImg" src="" alt="" style="width:100%;border-radius:8px;max-height:60vh;object-fit:cover"/>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lightweight interactions: mobile menu + modal + contact fallback
+    (function(){
+      const menuBtn = document.getElementById('menuBtn');
+      let navOpen = false;
+
+      menuBtn.addEventListener('click', ()=>{
+        navOpen = !navOpen;
+        if(navOpen){
+          const nav = document.createElement('div');
+          nav.id = 'mobileNav';
+          nav.style.position='fixed';nav.style.top='72px';nav.style.right='18px';nav.style.background='var(--card)';nav.style.padding='12px';nav.style.borderRadius='10px';nav.style.boxShadow='0 6px 20px rgba(0,0,0,0.5)';
+          nav.innerHTML = '<a href="#projects" style="display:block;padding:8px 0">Projects</a><a href="#about" style="display:block;padding:8px 0">About</a><a href="#contact" style="display:block;padding:8px 0">Contact</a>';
+          document.body.appendChild(nav);
+          menuBtn.textContent='✕';
+        } else {
+          const existing = document.getElementById('mobileNav');
+          if(existing) existing.remove();
+          menuBtn.textContent='☰';
+        }
+      });
+
+      // Modal
+      const modal = document.getElementById('modal');
+      const modalImg = document.getElementById('modalImg');
+      const modalTitle = document.getElementById('modalTitle');
+      const closeModal = document.getElementById('closeModal');
+
+      document.querySelectorAll('.view').forEach(el=>{
+        el.addEventListener('click', (e)=>{
+          e.preventDefault();
+          const title = el.dataset.title || 'Preview';
+          const img = el.dataset.img || '';
+          modalTitle.textContent = title;
+          // If you want real images, replace dataset.img with a real path or URL.
+          modalImg.src = img || 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700"><rect width="100%" height="100%" fill="%23071c2a"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="Inter,Arial" font-size="32" fill="%23fff">Preview: '+encodeURIComponent(title)+'</text></svg>';
+          modal.classList.add('open');
+          modal.setAttribute('aria-hidden','false');
+        })
+      });
+
+      function close(){
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden','true');
+        modalImg.src = '';
+      }
+      closeModal.addEventListener('click', close);
+      modal.addEventListener('click', (e)=>{ if(e.target === modal) close(); });
+
+      // Contact form: open mailto as fallback (keeps it client-only & lightweight)
+      window.submitContact = function(e){
+        e.preventDefault();
+        const form = e.target;
+        const name = encodeURIComponent(form.name.value.trim());
+        const message = encodeURIComponent(form.message.value.trim());
+        const subject = encodeURIComponent('Portfolio contact from '+(name||'Website'));
+        const body = message + '\n\n— '+ (name||'');
+        // Use mailto to keep this single-file. You can swap to a server endpoint later.
+        window.location.href = 'mailto:hello@example.com?subject='+subject+'&body='+body;
+      }
+
+      // Accessibility: close modal with Esc
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){
+        if(modal.classList.contains('open')) close();
+        const mobile = document.getElementById('mobileNav'); if(mobile) {mobile.remove(); menuBtn.textContent='☰'; navOpen=false}
+      }});
+
+    })();
+  </script>
+</body>
+</html>
